@@ -37,8 +37,9 @@ setup(
     ],
     install_requires=[
         'Django>=3.0.0',
-        'djangorestframework>=3.12.2',
+        'djangorestframework>=3.10',
         'django-oauth-toolkit>=1.3.2',
+        'drf-yasg',
     ],
     extras_require={
         'dev': [
