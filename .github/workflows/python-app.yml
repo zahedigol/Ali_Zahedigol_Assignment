@@ -1,0 +1,31 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ "develop" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.RSA_SECRET }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd ${{ secrets.DEPLOYMENT_PATH }}
+          GIT_SSH_COMMAND='ssh -i ${{ secrets.RSA_SECRET }} -o IdentitiesOnly=yes' git pull
+          source .activate
+          pip install --upgrade pip
+          pip install -e ".[dev]"
