@@ -1,6 +1,8 @@
 from rest_framework import routers
 
-# if you work with router:
+from users.api.views import UserViewSet
+
 router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
 
 api_url = router.urls
