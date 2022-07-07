@@ -23,6 +23,7 @@ def import_sales_from_csv(model, user_id: int, fixture_file: Path = None, reader
 
 
 def _import_with_reader(model, reader, user_id: int):
+    # TODO: check structure of csv file. (columns, types, etc.)
     sniffer = csv.Sniffer()
     dialect = sniffer.sniff(reader.readline().decode('utf-8'))
     reader.seek(0)

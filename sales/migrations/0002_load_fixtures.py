@@ -18,8 +18,8 @@ def add_sales(apps, schema_editor):
     fixture_file = Path(os.path.join(fixture_dir, fixture_filename))
 
     with transaction.atomic():
-        import_sales_from_csv(Sale, fixture_file, user_one.id)
-        import_sales_from_csv(Sale, fixture_file, user_two.id)
+        import_sales_from_csv(Sale, user_one.id, fixture_file=fixture_file)
+        import_sales_from_csv(Sale, user_two.id, fixture_file=fixture_file)
 
 
 def drop_sales(apps, schema_editor):
