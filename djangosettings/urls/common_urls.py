@@ -37,4 +37,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_url)),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
