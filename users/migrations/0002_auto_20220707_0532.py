@@ -5,13 +5,14 @@ from django.db import migrations
 
 def _add_default_users(apps, schema_editor):
     User = apps.get_model('users', 'User')
-    for username, raw_password in [
-        ('test_user@meistery.net', 'trial_application'),
-        ('test_user2@meistery.net', 'trial_application')
+    for username, raw_password, is_staff, is_superuser in [
+        ('ali@gmail.com', '123', True, True),
+        ('test_user@meistery.net', 'trial_application', False, False),
+        ('test_user2@meistery.net', 'trial_application', False, False),
     ]:
         User.objects.get_or_create(
             email=username,
-            defaults={'password': make_password(raw_password), 'is_staff': False, 'is_superuser': False}
+            defaults={'password': make_password(raw_password), 'is_staff': is_staff, 'is_superuser': is_superuser}
         )
 
 
