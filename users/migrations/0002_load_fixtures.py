@@ -12,7 +12,7 @@ def _add_default_users(apps, schema_editor):
     ]:
         User.objects.get_or_create(
             email=username,
-            defaults={'password': make_password(raw_password), 'is_staff': is_staff, 'is_superuser': is_superuser}
+            defaults={'password': make_password(raw_password), 'is_staff': is_staff, 'is_superuser': is_superuser},
         )
 
 
@@ -22,10 +22,11 @@ def _add_default_application(apps, schema_editor):
         name='Trial Application',
         defaults={
             'client_id': 'C8Qp0eQnhosJ9Z1DNd7UvQ5M9tiMT4pleqlWkqW3',
-            'client_secret': 'b49eoIqNsMEtUhlGjymYabD14AbfCWx99Z0bcsO82AYweB9ZaZJJtZARmDx1f1QN3kjy7IpKYuuZzynUy7NDpeRVZcFPA8XaHR1pAXvVeBNMh9dxvZjqknSrqvwzDkRd',
+            'client_secret': 'b49eoIqNsMEtUhlGjymYabD14AbfCWx99Z0bcsO82AYw'
+            'eB9ZaZJJtZARmDx1f1QN3kjy7IpKYuuZzynUy7NDpeRVZcFPA8XaHR1pAXvVeBNMh9dxvZjqknSrqvwzDkRd',
             'client_type': 'public',
             'authorization_grant_type': 'password',
-        }
+        },
     )
 
 
