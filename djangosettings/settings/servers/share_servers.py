@@ -1,5 +1,4 @@
 import dj_database_url
-import django_heroku
 
 from ..base import *
 
@@ -20,4 +19,4 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = os.path.join(BASE_DIR.parent, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-django_heroku.settings(locals())
+DATABASES = {'default': dj_database_url.config()}
