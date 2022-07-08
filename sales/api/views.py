@@ -74,8 +74,10 @@ class SaleModelViewSet(ModelViewSet):
         item = Sale.objects.all().statistics(user_id=request.user.id)
 
         highest_revenue_sale_for_current_user = None
+        product_highest_revenue_for_current_user = None
         product_highest_sales_number_for_current_user = None
         sale_id_highest_revenue_sale_for_current_user = item.get('sale_id_highest_revenue_sale_for_current_user')
+        sale_id_product_highest_revenue_for_current_user = item.get('sale_id_product_highest_revenue_for_current_user')
         sale_id_product_highest_sales_number_for_current_user = item.get(
             'sale_id_product_highest_sales_number_for_current_user'
         )
@@ -84,6 +86,7 @@ class SaleModelViewSet(ModelViewSet):
                 self.get_queryset().filter(
                     pk__in=[
                         sale_id_highest_revenue_sale_for_current_user,
+                        sale_id_product_highest_revenue_for_current_user,
                         sale_id_product_highest_sales_number_for_current_user,
                     ]
                 )
@@ -91,11 +94,14 @@ class SaleModelViewSet(ModelViewSet):
             for sale in queryset:
                 if sale.id == sale_id_highest_revenue_sale_for_current_user:
                     highest_revenue_sale_for_current_user = sale
+                if sale.id == sale_id_product_highest_revenue_for_current_user:
+                    product_highest_revenue_for_current_user = sale
                 if sale.id == sale_id_product_highest_sales_number_for_current_user:
                     product_highest_sales_number_for_current_user = sale
         response = {
             'average_sales_for_current_user': item.get('average_sales_for_current_user'),
             'average_sale_all_user': item.get('average_sale_all_user'),
+            'product_highest_revenue_for_current_user': product_highest_revenue_for_current_user,
             'highest_revenue_sale_for_current_user': highest_revenue_sale_for_current_user,
             'product_highest_sales_number_for_current_user': product_highest_sales_number_for_current_user,
         }

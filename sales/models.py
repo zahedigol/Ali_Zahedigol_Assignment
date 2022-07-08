@@ -17,6 +17,11 @@ class SaleQueryset(models.QuerySet):
             ),
             sale_id_highest_revenue_sale_for_current_user=Window(
                 expression=FirstValue('id'),
+                order_by=F('sales').desc(),
+                **window_expression_per_user,
+            ),
+            sale_id_product_highest_revenue_for_current_user=Window(
+                expression=FirstValue('id'),
                 order_by=F('revenue').desc(),
                 **window_expression_per_user,
             ),
@@ -32,6 +37,7 @@ class SaleQueryset(models.QuerySet):
                 'average_sales_for_current_user',
                 'average_sale_all_user',
                 'sale_id_highest_revenue_sale_for_current_user',
+                'sale_id_product_highest_revenue_for_current_user',
                 'sale_id_product_highest_sales_number_for_current_user',
             )
             .order_by('-user_relevancy')
