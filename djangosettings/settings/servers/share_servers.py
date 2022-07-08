@@ -3,7 +3,7 @@ import django_heroku
 
 from ..base import *
 
-DEBUG = True
+DEBUG = False
 MIDDLEWARE += [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
