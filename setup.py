@@ -40,6 +40,12 @@ setup(
         'djangorestframework>=3.10',
         'django-oauth-toolkit>=1.3.2',
         'drf-yasg',
+        'dj-database-url',
+        'gunicorn',
+        'psycopg2',
+        'python-decouple',
+        'whitenoise',
+        'django-heroku',
     ],
     extras_require={
         'dev': [
@@ -56,6 +62,6 @@ setup(
             'pytest-ipdb @ git+https://github.com/mverteuil/pytest-ipdb.git',
             'mixer>=6.1.3',
             'mock>=4.0.2',
-        ]
+        ],
     },
 )
