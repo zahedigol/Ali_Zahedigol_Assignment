@@ -4,9 +4,6 @@ import django_heroku
 from ..base import *
 
 DEBUG = False
-MIDDLEWARE += [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-]
 
 REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
     'anon': '500/day',
