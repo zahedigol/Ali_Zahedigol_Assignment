@@ -29,6 +29,5 @@ read_env()
 
 try:
     from .local_settings import *
-
 except:
     from .servers.share_servers import *
