@@ -1,0 +1,15 @@
+[tool.black]
+skip-string-normalization=1
+line-length = 119
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.tox
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"

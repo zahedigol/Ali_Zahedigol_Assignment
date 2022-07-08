@@ -1,0 +1,14 @@
+[run]
+omit =
+    runtests.py,
+    *.apps.py,
+    *migrations/*,
+    *djangosettings/*,
+    *tests/*,
+    *urls*.py,
+    *wsgi.py,
+    *asgi.py,
+    *routing.py,
+    manage.py,
+    utils/api/drf.py,
+    *__init__.py
