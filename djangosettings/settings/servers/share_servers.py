@@ -14,9 +14,9 @@ REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
 }
 
 # TODO: configure s3 storage
-MEDIA_ROOT = os.path.join(BASE_DIR.parent, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
-STATIC_ROOT = os.path.join(BASE_DIR.parent, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 DATABASES = {'default': dj_database_url.config()}
