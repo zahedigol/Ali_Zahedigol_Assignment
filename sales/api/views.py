@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from sales.api.serializers import SaleSerializer
+from sales.api.serializers import SaleSerializer, SaleStatisticsSerializer
 from sales.models import Sale
 from sales.utils import import_sales_from_csv
 
@@ -68,3 +68,35 @@ class SaleModelViewSet(ModelViewSet):
             return Response({'error': 'Invalid file type'}, status=status.HTTP_400_BAD_REQUEST)
         import_sales_from_csv(Sale, self.request.user.id, reader=file_obj)
         return self.list(request)
+
+    @action(methods=['get'], serializer_class=SaleStatisticsSerializer, detail=False)
+    def statistics(self, request):
+        item = Sale.objects.all().statistics(user_id=request.user.id)
+
+        highest_revenue_sale_for_current_user = None
+        product_highest_sales_number_for_current_user = None
+        sale_id_highest_revenue_sale_for_current_user = item.get('sale_id_highest_revenue_sale_for_current_user')
+        sale_id_product_highest_sales_number_for_current_user = item.get(
+            'sale_id_product_highest_sales_number_for_current_user'
+        )
+        if item:
+            queryset = list(
+                self.get_queryset().filter(
+                    pk__in=[
+                        sale_id_highest_revenue_sale_for_current_user,
+                        sale_id_product_highest_sales_number_for_current_user,
+                    ]
+                )
+            )
+            for sale in queryset:
+                if sale.id == sale_id_highest_revenue_sale_for_current_user:
+                    highest_revenue_sale_for_current_user = sale
+                if sale.id == sale_id_product_highest_sales_number_for_current_user:
+                    product_highest_sales_number_for_current_user = sale
+        response = {
+            'average_sales_for_current_user': item.get('average_sales_for_current_user'),
+            'average_sale_all_user': item.get('average_sale_all_user'),
+            'highest_revenue_sale_for_current_user': highest_revenue_sale_for_current_user,
+            'product_highest_sales_number_for_current_user': product_highest_sales_number_for_current_user,
+        }
+        return Response(self.get_serializer(response).data, status=status.HTTP_200_OK)

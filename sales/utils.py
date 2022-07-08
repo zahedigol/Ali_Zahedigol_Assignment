@@ -3,11 +3,12 @@ import csv
 import decimal
 from pathlib import Path
 
+from django.db.models import F
 from django.utils.dateparse import parse_date
 
 
 def normalize_product_name(product_name: str):
-    return product_name.lower().replace(' ', '_')
+    return product_name.lower().strip().replace(' ', '_')
 
 
 def import_sales_from_csv(model, user_id: int, fixture_file: Path = None, reader=None):
@@ -42,6 +43,6 @@ def _import_with_reader(model, reader, user_id: int):
         }
         sale, *_ = model.objects.get_or_create(**pre_condition)
         sale.product = row['product']
-        sale.revenue += decimal.Decimal(row['revenue'])
-        sale.sales_number += int(row['sales_number'])
+        sale.revenue = F('revenue') + decimal.Decimal(row['revenue'])
+        sale.sales_number = F('sales_number') + int(row['sales_number'])
         sale.save()
