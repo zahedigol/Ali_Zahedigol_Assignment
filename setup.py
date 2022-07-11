@@ -46,6 +46,7 @@ setup(
         'python-decouple',
         'whitenoise',
         'django-heroku',
+        'django-cors-headers>=3.13.0',
     ],
     extras_require={
         'dev': [
