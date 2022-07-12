@@ -172,3 +172,20 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+        'type': 'oauth2',
+        'name': 'Authorization',
+        'in': 'header',
+        'flow': 'password',
+        'authorizationUrl': '/oauth/authorize/',
+        'tokenUrl': '/oauth/token/',
+        'scopes': {
+            'read': 'Read access',
+            'write': 'Write access',
+        }
+      }
+   }
+}
