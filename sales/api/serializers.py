@@ -15,12 +15,14 @@ class SaleSerializer(serializers.ModelSerializer):
             'sales_number',
             'date',
             'user',
+            'product_normalized',
         ]
 
         read_only_fields = [
             'id',
             'user',
             'product',
+            'product_normalized',
         ]
 
 
