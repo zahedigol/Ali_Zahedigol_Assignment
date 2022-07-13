@@ -17,3 +17,8 @@ You can use the following command to set it up locally:
     ```shell script
     pip install -e ".[test]"
     ```
+  
+* run:
+    ```shell script
+    python manage.py runserver
+    ```

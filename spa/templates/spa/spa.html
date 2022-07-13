@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}{% endblock %}
+
+{% block title %}Ali Zahedigol Assignment{% endblock %}
+
+{% block core %}
+<div id="root" style="height: 100%"></div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'vendors.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'assignment.bundle.js' %}"></script>
+{% endblock %}

@@ -5,3 +5,4 @@
 ali_zahedigol_assignment.egg-info
 *.pyc
 local_settings.py
+node_modules
