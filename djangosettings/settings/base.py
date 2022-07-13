@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'cities',
     'sales',
+    'spa',
 ]
 
 MIDDLEWARE = [
@@ -172,9 +173,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
+    'SECURITY_DEFINITIONS': {
       'Bearer': {
         'type': 'oauth2',
         'name': 'Authorization',
@@ -189,3 +189,6 @@ SWAGGER_SETTINGS = {
       }
    }
 }
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/dist'),
+]
